@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ch_zn">
+<head>
+    <meta charset="UTF-8">
+    <title>form practice</title>
+</head>
+<body>
+<form action="https://www.baidu.com" method=post>
+    <h1 align="center"> test form</h1>
+    <table align="center" cellspacing="2">
+        <tr>
+            <td> name</td>
+            <td><input type="text" name="name" value="default"/></td>
+        </tr>
+
+        <tr>
+            <td> sex</td>
+            <td><input type="radio" name="boy" checked="checked"/>male</td>
+            <td><input type="radio" name="girl" checked="checked"/>female</td>
+        </tr>
+
+        <tr>
+            <td> country</td>
+            <td>
+                <select>
+                    <option selected="selected">
+                        default
+                    </option>
+                    <option>
+                        test
+                    </option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><input type=reset /></td>
+            <td><input type=submit /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
