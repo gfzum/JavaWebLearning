@@ -21,11 +21,11 @@ From 尚硅谷
 
 ### 2、标签介绍
 
-- 双标签<name> </name>
-- 单标签<name />
+- 双标签 `<name> </name>`
+- 单标签 `<name />`
 - 大小写不敏感
 - 属性
-  - 基本属性：bgcolor
+  - 基本属性：bgcolor等
   - 事件属性：`onclick = "alert("1");"`
 
 ### 3、特殊字符
@@ -38,7 +38,7 @@ From 尚硅谷
 
 ### 4、常用标签
 
-h、a(href, target可以指定iframe名)、font?、img(src, alt)、table(tr, td, border, cellspacing, row/colspan)、form(action=ip, method=get/post)、input(type=text, radio, checkbox, submit, reset, hidden...)、select(option)、div、span、p
+`a(href, target可以指定iframe名)`、`img(src, alt)`、`table(tr, td, border, cellspacing, row/colspan)`、`form(action=ip, method=get/post)`、`input(type=text, radio, checkbox, submit, reset, hidden...)`、`select(option)`、`div`、`span`、`p`
 
 - 相对路径
   - . html文件当前目录
@@ -94,4 +94,65 @@ border-collapse: collapse
 
 
 ## Simple JavaScript
+
+### 1、js和html结合的方式
+
+- 在head或body中用script标签书写
+- 使用script引入写好的 代码
+
+### 2、变量和运算
+
+- 函数类型 function
+- undefined 未定义，变量未赋初始值时默认
+- null 空值；
+- NAN Not a Number
+
+#### 关系运算
+
+== 等于； ===全等于：除了字面值的比较之外，还会比较两个变量的数据类型
+
+#### 逻辑运算
+
+所有的变量都可以作为一个boolean类型变量，0、null、undefined、空串“”为假
+
+**返回能确定结果的值**
+
+- && 且运算
+  - 当表达式全为真的时候。返回最后一个表达式的值
+  - 当表达式中有一个为假的时候，返回第一个为假的表达式的值
+-  || 或运算
+  - 当表达式全为假时，返回最后一个表达式的值
+  - 只要有一个表达式为真，就会把回第一个为真的表达式的值
+- 有短路，当运算有结果了之后，后面的表达式不再执行
+
+### 3、数组和函数
+
+通过数组下标**赋值**后，最大的下标值会自动给数组扩容
+
+```javascript
+//不用声明变量和返回值类型
+function fun(a, b){
+    return a + b;
+}
+
+var fun_name = function(a){}
+```
+
+函数的**arguments隐形参数**：不需要定义，可用来获取传入参数的值，故JS函数不允许重载（甚至不用定义传入参数）
+
+### 4、自定义对象
+
+```javascript
+//定义
+var a = new Object();
+a.name = "a_name";
+a.age = 19;
+a.fun = function(){};
+
+var a = {
+	name : value,
+    age : value,
+    fun : function(){}
+};
+```
 
