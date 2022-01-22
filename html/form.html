@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>form practice</title>
+    <link rel="stylesheet" href="../css/test.css" type="text/css">
 </head>
 <body>
 <form action="https://www.baidu.com" method=post>
     <h1 align="center"> test form</h1>
     <table align="center" cellspacing="2">
         <tr>
-            <td> name</td>
+            <td id="id01"> name</td>
             <td><input type="text" name="name" value="default"/></td>
         </tr>
 
         <tr>
-            <td> sex</td>
+            <td class="class01"> sex</td>
             <td><input type="radio" name="boy" checked="checked"/>male</td>
             <td><input type="radio" name="girl" checked="checked"/>female</td>
         </tr>
 
         <tr>
-            <td> country</td>
+            <td class="class01"> country</td>
             <td>
                 <select>
                     <option selected="selected">
@@ -35,6 +36,9 @@
         <tr>
             <td><input type=reset /></td>
             <td><input type=submit /></td>
+        </tr>
+        <tr>
+            <td ><a href = https://baidu.com target="_blank" > href_test </a></td>
         </tr>
     </table>
 </form>
