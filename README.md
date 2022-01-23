@@ -127,7 +127,9 @@ border-collapse: collapse
 
 ### 3、数组和函数
 
-通过数组下标**赋值**后，最大的下标值会自动给数组扩容
+通过数组下标**赋值**后，最大的下标值会自动给数组扩容，未赋值的位置值为undefined
+
+函数：
 
 ```javascript
 //不用声明变量和返回值类型
@@ -150,9 +152,43 @@ a.age = 19;
 a.fun = function(){};
 
 var a = {
-	name : value,
+    name : value,
     age : value,
     fun : function(){}
 };
 ```
 
+### 5、事件
+
+ 电脑设备与页面进行交互的响应
+
+- onload 页面加载完成，常用于页面代码初始化
+- onclick 单击事件
+- onblur 失去焦点，常用于输入框失去焦点后验证内容
+- onchange 内容发生改变，常用于下拉列表和输入框内容发生改变后
+- onsubmit 表单提交，注意要加在form标签而非submit标签上
+
+#### 事件的注册（绑定）
+
+事件响应后要执行的代码
+
+- 静态注册：通过html标签的事件属性直接赋予事件响应后的代码
+- 动态注册：先通过js代码得到标签的dom对象，通过dom对象.事件名=function赋予代码
+
+```javascript
+//动态注册
+window.onload = function(){
+    //获取标签对象
+    var obj = document.getElementById(id);
+    //标签对象.事件名=function
+    obj.onclick = function(){}
+}
+```
+
+### 6、DOM模型
+
+Document Object Model 把文档中的标签、属性、文本转换成对象来管理
+
+#### Document对象
+
+管理了所有html文档内容，通过树结构存储信息，把所有的标签、属性、文本对象化，可以用来访问所有对象

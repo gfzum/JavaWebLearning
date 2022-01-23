@@ -7,12 +7,12 @@
     <script type="text/javascript" src = "../js/test.js" ></script>
 </head>
 <body>
-<form action="https://www.baidu.com" method=post>
+<form action="https://www.baidu.com" method=post id =form>
     <h1 align="center"> test form</h1>
     <table align="center" cellspacing="2">
         <tr>
             <td id="id01"> name</td>
-            <td><input type="text" name="name" value="default"/></td>
+            <td><input type="text" name="name" value="default" id = text /></td>
         </tr>
 
         <tr>
@@ -24,7 +24,7 @@
         <tr>
             <td class="class01"> country</td>
             <td>
-                <select>
+                <select id = sel>
                     <option selected="selected">
                         default
                     </option>
@@ -35,13 +35,14 @@
             </td>
         </tr>
         <tr>
-            <td><input type=reset /></td>
-            <td><input type=submit /></td>
+            <td><input type=reset id = reset /></td>
+            <td><input type=submit id = sub /></td>
         </tr>
         <tr>
             <td ><a href = https://baidu.com target="_blank" > href_test </a></td>
         </tr>
     </table>
 </form>
+    <button id = check > check </button>
 </body>
 </html>
