@@ -17,6 +17,12 @@ var arr = [1,2,3];
 //alert(arr[4]);
 
 window.onload = function (){
+
+    var divObj = document.createElement("div");
+    divObj.appendChild(document.createTextNode("appendTest"));
+    document.body.appendChild(divObj);
+    divObj.align = "center";
+
     var textObj = document.getElementById("text");
     textObj.onblur = function (){
         console.log("lose focus")
@@ -43,10 +49,18 @@ window.onload = function (){
     checkObj.onclick = function (){
         var textObj = document.getElementById("text");
         var pat = /^\w{5,12}$/;
+        var showobj = document.getElementById("show");
         if (pat.test(textObj.value))
-            alert("right");
+            showobj.innerHTML = "right";
         else
-            alert("false");
+            showobj.innerHTML = "wrong";
     }
-
+   var allObj = document.getElementById("all");
+    allObj.onclick = function (){
+        var hobbies = document.getElementsByName("hobby");
+        for (var i = 0; i < hobbies.length; i++) {
+            hobbies[i].checked = true;
+        }
+        //为什么会submit false呢？
+    }
 }
