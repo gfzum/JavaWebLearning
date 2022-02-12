@@ -329,6 +329,99 @@ System.out.println(context.getRealPath("/")); //映射到webapp目录
 context.setAttribute("key", "value");
 ```
 
-### 3、HTTP协议
+### 2、HTTP协议
 
- 
+- 请求：客户端向服务器发送数据
+- 响应：服务器向客户端发送数据
+
+####  GET请求
+
+- 请求行：请求方式 + 资源路径[+?+请求参数] + 协议版本号
+- 请求头：key : value
+  - Accept：客户端可接受的数据类型
+  - Host：请求服务器ip地址及端口
+  - Connnection：连接如何处理
+    - Keep-Alive：回传数据后保持一段时间连接
+    - Closed：马上关闭
+- a标签、link标签引入css、script标签引入js、img、iframe、输入地址后回车
+
+####  POST请求
+
+- 请求行
+- 请求头 + 空行
+  - Referer：发起请求时的地址
+  - Content-Type：发送的数据类型
+    - application/x-www-form-urlencoded：提交数据格式为name=value&，然后进行url编码
+    - multipart/form-data：以多段形式提交数据给服务器（流形式，用于上传）
+  - Cache-Control：控制缓存
+- **请求体**：发送给服务器的数据
+
+#### HTTP响应格式
+
+- 响应行：协议和版本号 + 状态码 + 状态描述符
+- 响应头：key : value + 空行
+  - Server：服务器信息
+  - Content-Type：响应体数据类型
+- 响应体：回传给客户端的数据
+
+常见响应（状态）码：
+
+- 200：请求成功
+- 302：请求重定向
+- 404：服务器收到，但数据不存在（地址错误）
+- 500：服务器收到，但内部有错误（代码错误）
+
+#### MIME类型说明
+
+HTTP协议中的数据类型，格式：”大类型/小类型“，与某种文件的扩展名相对应
+
+| 文件     | MIME类型   |
+| -------- | ---------- |
+| html文本 | text/html  |
+| JPEG图像 | image/ipeg |
+
+### 3、HttpServletRequest类
+
+每当有请求进入Tomcat服务器，服务器会把http协议信息封装入Request对象，传递到service方法中。可以通过HttpServerRequest对象获取所有请求的信息。
+
+- URI: Uniform Resource Identifier 资源标志符
+- URL: Uniform Resource Locator 资源定位符（绝对路径）
+
+获取post请求的参数时，须**在获取参数前**使用`setCharacterEncoding("UTF-8")`设置字符集
+
+#### 请求转发
+
+服务器收到请求后，从一个资源跳转到另一个资源（一次请求，共享Request域中的数据，资源地址一直是转发前的地址）
+
+可以转发到WEB-INF中（浏览器无法访问该文件夹），无法访问工程外的资源
+
+```java
+//servlet1中
+request.setAtrribute("key", "value"); //设置标识
+
+//请求转发，以‘/’打头
+RequesetDispatcher dispatcher = request.getRequestDispatcher("/servlet2"); 
+RequesetDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/index.html"); 
+dispatcher.forward(requst, response); //转发
+
+//servlet2中
+Object key1 = req.getAttribute("key");
+```
+
+`base`标签可以设置页面**相对路径**工作时参照的地址（以防通过请求转发进行跳转后出现错误）
+
+```html
+<head>
+    <base href = "path" />
+</head>
+```
+
+对于 `/`，其为一种绝对路径：
+
+- 被浏览器解析：`http://ip:port/`
+- 被服务器解析：`http://ip:port/工程路径`
+- 特殊情况：`response.sendRedirect("/")` 把`/`发送给浏览器解析
+
+### 4、HttpServletResponse类
+
+每次请求服务器都会创建一个HttpServletResponse对象，可通过其设置返回给客户端的信息
