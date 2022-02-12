@@ -263,7 +263,7 @@ $(function (){
 })
 ```
 
-### 1、核心函数 $
+### 核心函数 $
 
 - 传参 函数：window.onload
 - 传参 html字符串：创建节点对象
@@ -271,3 +271,64 @@ $(function (){
 - 传参 DOM对象：包装为jQuery对象
 
 JQuery对象时dom对象的数组 + 一系列功能函数
+
+
+
+## Servlet
+
+JavaWeb三大组件：Servlet程序、Filter过滤器、Listener监听器
+
+Servlet：运行在服务器上的java程序，接受客户端的请求并响应数据
+
+### 1、基础说明
+
+#### 程序配置
+
+```xml
+<!--在web.xml中对写好的servlet程序进行配置-->
+
+<!--在不使用Java EE注解的情况下需要进行以下配置 name是别名 class是类全名-->
+<servlet>
+    <servlet-name>hello</servlet-name>
+    <servlet-class>com.gfzum.web_begin.HelloServlet</servlet-class>
+</servlet>
+
+<!--将name与url进行对应，/ 代表工程路径 -->
+<servlet-mapping>
+    <servlet-name>hello</servlet-name>
+    <url-pattern>/hello</url-pattern>
+</servlet-mapping>"
+```
+
+#### 生命周期
+
+1. 执行Servlet构造器方法，创建程序时调用
+2. 执行`init`初始化方法，创建程序时调用
+3. 执行`service`方法，每次访问都会调用
+4. 执行`destory`方法，停止时调用
+
+#### 继承体系
+
+<img src="\img\servlet继承体系.png" style="zoom: 67%;" />
+
+#### ServletConfig 
+
+获取程序别名servlet-name、servlet的初始化参数init-param、ServletContext对象
+
+#### ServletContext
+
+- 一个接口，表示Servlet上下文对象
+- 一个Web工程只有一个实例，在工程部署启动时创建、停止时校徽
+- 域对象：可以像Map一样存取数据的对象，域指存取数据的操作范围（整个web工程）
+- 获取web.xml中配置的context-param、当前工程路径、工程部署后的绝对路径
+
+```java
+ServletContext context = getServletConfig().getServletContext();
+System.out.println(context.getRealPath("/")); //映射到webapp目录
+
+context.setAttribute("key", "value");
+```
+
+### 3、HTTP协议
+
+ 
