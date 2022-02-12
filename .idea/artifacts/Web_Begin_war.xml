@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Web_Begin:war">
+    <output-path>$PROJECT_DIR$/Web_Begin/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>Web_Begin</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="Web_Begin-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="Web_Begin:war exploded" />
+    </root>
+  </artifact>
+</component>

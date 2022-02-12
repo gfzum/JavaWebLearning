@@ -249,3 +249,25 @@ patt.test(string);
 - `appendChild` 添加一个子节点
 
 常用属性：childNodes, firstChild, parentNode, nextSibling, className, innerHTML等
+
+
+
+## Simple JQuery
+
+虽然基本过时了，但为了能简单看懂源码还是了解一下
+
+```javascript
+//引入jquery库
+$(function (){
+    var $obj = $("objId");
+})
+```
+
+### 1、核心函数 $
+
+- 传参 函数：window.onload
+- 传参 html字符串：创建节点对象
+- 传参 选择器字符串：查找对象
+- 传参 DOM对象：包装为jQuery对象
+
+JQuery对象时dom对象的数组 + 一系列功能函数
