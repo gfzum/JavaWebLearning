@@ -38,7 +38,7 @@ From 尚硅谷
 
 ### 4、常用标签
 
-`a(href, target可以指定iframe名)`、`img(src, alt)`、`table(tr, td, border, cellspacing, row/colspan)`、`form(action=ip, method=get/post)`、`input(type=text, radio, checkbox, submit, reset, hidden...)`、`select(option)`、`div`、`span`、`p`
+`a(href, target可以指定iframe名)`、`img(src, alt)`、`table(tr, td, border, cellspacing, row/colspan)`、`form(action=ip, method=get/post)`、`input(type=text, radio, checkbox, submit, reset, hidden...)`、`select(option)`、`div`、`span`（不换行块标签）、`p`
 
 - 相对路径
   - . html文件当前目录
@@ -89,6 +89,12 @@ text-decoration: none
 
 /* table边框合并 */
 border-collapse: collapse
+
+/* 盒子模型 */
+border margin padding
+
+/* 定位和浮动 */
+position float
 ```
 
 
@@ -162,13 +168,14 @@ var a = {
 
  电脑设备与页面进行交互的响应
 
-- onload 页面加载完成，常用于页面代码初始化
-- onclick 单击事件
-- onblur 失去焦点，常用于输入框失去焦点后验证内容
-- onchange 内容发生改变，常用于下拉列表和输入框内容发生改变后
-- onsubmit 表单提交，注意要加在form标签而非submit标签上
+- `onload` 页面加载完成，常用于页面代码初始化
+- `onclick` 单击事件
+- `onmouseover` `onmouseout` 鼠标悬浮/离开
+- `onblur` 失去焦点，常用于输入框失去焦点后验证内容
+- `onchange` 内容发生改变，常用于下拉列表和输入框内容发生改变后
+- `onsubmit` 表单提交，注意要加在form标签而非submit标签上
 
-和table配合可能出问题？
+和table配合时，可能出现事件传递(tr -> td)
 
 #### 事件的注册（绑定）
 
