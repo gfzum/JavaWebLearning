@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Session Test</title>
+    <base href="http://localhost:8080/web_begin" />
+</head>
+<body>
+  <iframe name = "target" width="500" height="500"></iframe>
+  <ul>
+      <li><a target="target" href="/web_begin/SessionServlet?action=createSession">create</a> </li>
+      <li><a target="target" href="/web_begin/SessionServlet?action=zeroTest">change</a> </li>
+      <li><a target="target" href="/web_begin/SessionServlet?action=deleteSession">delete</a> </li>
+  </ul>
+</body>
+</html>

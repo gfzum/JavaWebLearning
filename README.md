@@ -524,5 +524,23 @@ cookie2 path = /test
 
 ### 6、Session
 
-Http无状态：服务器无法判断两次请求是否属于同一个客户端，可以通过会话跟踪技术解决
+Http无状态：服务器无法判断两次请求是否属于同一个客户端，故可为每个客户端维护一个Session会话，用来保存用户登陆的信息。Session保存在服务器端。
 
+- `request.getSession()` 第一次调用时创建会话，之后调用为获取session对象
+- `isNew` 判断session是否是新session
+- `getId()` 得到每个session的唯一ID
+- 通过`setAttribute()` `getAttribute()` 存储和获取数据
+
+#### Session生命周期
+
+- `session.setMaxInactiveInterval(int interval)`  设置超时时长，单位为秒，-1永不超时
+- 默认为30min，可在web.xml中配置
+- 超时时长：客户端**两次请求间的最大间隔时长**
+- `session.invalidate()` 让当前session会话马上无效
+
+#### 和浏览器的关联
+
+- 服务器每次创建session的时候都会创建一个cookie对象，cookie name为`JSESSIONID`
+- 客户端每次对服务器发送请求，都会吧SessionId以cookie的形式发送给服务器
+- 服务器根据id找到创建好的session对象
+- 当cookie被删除时，客户源再发送请求时会重新创建新的session

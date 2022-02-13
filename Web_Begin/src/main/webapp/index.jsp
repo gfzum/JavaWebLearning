@@ -19,6 +19,7 @@
         </tr>
         <tr> <td>name</td>
             <td><input type="submit" /></td>
+            <td><a href="session.html">sessionTest</a></td>
         </tr>
     </table>
 </form>
