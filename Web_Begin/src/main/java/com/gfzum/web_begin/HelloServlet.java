@@ -26,8 +26,9 @@ public class HelloServlet extends HttpServlet {
         out.println("<h1>" + message + "</h1>");
         out.println("</body></html>");
 
-        ServletContext context = getServletConfig().getServletContext();
-        System.out.println(context.getRealPath("/"));
+        System.out.println("servlet1");
+        response.sendRedirect("/web_begin/RedirectServlet");
+        System.out.println("servlet1 after redirect");
     }
 
     public void destroy() {

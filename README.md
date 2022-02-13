@@ -285,9 +285,9 @@ Servlet：运行在服务器上的java程序，接受客户端的请求并响应
 #### 程序配置
 
 ```xml
-<!--在web.xml中对写好的servlet程序进行配置-->
+<!--在不使用Java EE注解的情况下需要在web.xml中对写好的servlet程序进行配置-->
 
-<!--在不使用Java EE注解的情况下需要进行以下配置 name是别名 class是类全名-->
+<!-- name是别名 class是类全名-->
 <servlet>
     <servlet-name>hello</servlet-name>
     <servlet-class>com.gfzum.web_begin.HelloServlet</servlet-class>
@@ -300,16 +300,22 @@ Servlet：运行在服务器上的java程序，接受客户端的请求并响应
 </servlet-mapping>"
 ```
 
+```java
+//JavaEE annotated class
+@WebServlet(name = "ServletName", value = "/ServletName")
+```
+
 #### 生命周期
 
 1. 执行Servlet构造器方法，创建程序时调用
 2. 执行`init`初始化方法，创建程序时调用
 3. 执行`service`方法，每次访问都会调用
 4. 执行`destory`方法，停止时调用
+5. 可以通过`<load-on-startup>`设置servlet启动的先后顺序，数字越小启动越靠前
 
 #### 继承体系
 
-<img src="\img\servlet继承体系.png" style="zoom: 67%;" />
+<img src="/img/servlet继承体系.png" style="zoom: 67%;" />
 
 #### ServletConfig 
 
@@ -318,7 +324,7 @@ Servlet：运行在服务器上的java程序，接受客户端的请求并响应
 #### ServletContext
 
 - 一个接口，表示Servlet上下文对象
-- 一个Web工程只有一个实例，在工程部署启动时创建、停止时校徽
+- 一个Web工程只有一个实例，在工程部署启动时创建、停止时销毁
 - 域对象：可以像Map一样存取数据的对象，域指存取数据的操作范围（整个web工程）
 - 获取web.xml中配置的context-param、当前工程路径、工程部署后的绝对路径
 
@@ -332,7 +338,16 @@ context.setAttribute("key", "value");
 ### 2、HTTP协议
 
 - 请求：客户端向服务器发送数据
+
 - 响应：服务器向客户端发送数据
+
+- **GET**：从服务器端获取数据
+
+  **POST**：将数据保存到服务器端
+
+  **PUT**：命令服务器对数据执行更新
+
+  **DELETE**：命令服务器删除数据
 
 ####  GET请求
 
@@ -391,9 +406,10 @@ HTTP协议中的数据类型，格式：”大类型/小类型“，与某种文
 
 #### 请求转发
 
-服务器收到请求后，从一个资源跳转到另一个资源（一次请求，共享Request域中的数据，资源地址一直是转发前的地址）
-
-可以转发到WEB-INF中（浏览器无法访问该文件夹），无法访问工程外的资源
+- 服务器收到请求后，从一个资源跳转到另一个资源
+- 一次请求，共享Request域中的数据，资源地址一直是转发前的地址
+- 可以转发到WEB-INF中（浏览器无法访问该文件夹）
+- 无法访问工程外的资源
 
 ```java
 //servlet1中
@@ -420,8 +436,49 @@ Object key1 = req.getAttribute("key");
 
 - 被浏览器解析：`http://ip:port/`
 - 被服务器解析：`http://ip:port/工程路径`
-- 特殊情况：`response.sendRedirect("/")` 把`/`发送给浏览器解析
+- 特殊情况：`response.sendRedirect("/")` 把 `/` 发送给浏览器解析
 
 ### 4、HttpServletResponse类
 
 每次请求服务器都会创建一个HttpServletResponse对象，可通过其设置返回给客户端的信息
+
+#### 两种输出流
+
+- 字节流：`getOutputStream()` 常用于下载（传递二进制数据） 
+- 字符流：`getWriter()` 常用于回传字符串（常用）
+- 只能同时使用一个
+
+```java
+PrintWriter writer = resp.getWriter();
+writer.write("hello");
+```
+
+服务器默认字符集为`ISO-8859-1`，须进行更改：
+
+```java
+response.setCharacterEncoding("UTF-8") //服务器字符集
+response.setHeader("Content-Type", "text/html; charset=UTF-8"); //设置响应头更改浏览器字符集
+
+//同时设置服务器和客户端，要在获取流对象之前调用
+response.setContentType("Content-Type", "text/html; charset=UTF-8")；
+```
+
+#### 请求重定向 302
+
+客户端给服务器发送请求时，服务器将请求重定向至新的地址（应用于地址更改情况）
+
+```java
+//设置响应状态码表示重定向、响应头说明新地址
+response.setStatus(302);
+response.setHeader("Location", "path");
+//替换写法，注意该地址是发送给浏览器解析
+response.sendRedirect("path");
+```
+
+- 浏览器地址栏变化
+- 两次请求，不共享Request域中的数据
+- 无法访问到WEB-INF文件夹
+- 可以访问工程外的资源
+
+**重定向和转发都不会立即执行，会把Servlet中所有的代码都执行完毕以后再发生跳转**。
+
