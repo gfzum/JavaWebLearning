@@ -482,3 +482,47 @@ response.sendRedirect("path");
 
 **重定向和转发都不会立即执行，会把Servlet中所有的代码都执行完毕以后再发生跳转**。
 
+### 5、Cookie 
+
+- cookie是servlet发送给web浏览器的键值对信息，cookie值可以唯一表示客户端，常用于会话管理
+- 有了cookie后，每次请求客户端会发送回服务器
+- 每个cookie大小不超过4kb
+
+```java
+//创建cookie
+Cookie cookie = new Cookie("key", "value");
+response.addCookie(cookie);
+
+//获取cookie数组，查找指定cookie须单独判断
+Cookie[] cookies = request.getCookies();
+```
+
+更改cookie值的两种方法：
+
+- 创建新的同key值cookie，写入新value
+- 使用`setValue()`修改原cookie的值
+
+#### Cookie生命控制
+
+`setMaxAge(int expiry)` 设置cookie最大生存时间，单位为秒
+
+- 参数为正：在指定秒数后删除cookie
+- 负数：浏览器退出时删除cookie（默认，session级别）
+- 0：直接删除cookie
+
+#### Cookie的有效路径Path
+
+通过请求来对发送给服务器的cookie进行过滤
+
+```java
+cookie2.setPath(req.getContextPath() + "/test"); //在创建cookie时设置path
+
+cookie1 path = / （默认）
+cookie2 path = /test
+在/下，只有cookie1会被发送
+```
+
+### 6、Session
+
+Http无状态：服务器无法判断两次请求是否属于同一个客户端，可以通过会话跟踪技术解决
+

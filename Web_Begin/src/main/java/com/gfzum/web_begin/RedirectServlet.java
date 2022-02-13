@@ -10,10 +10,18 @@ public class RedirectServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("servlet2");
+        response.sendRedirect("/web_begin/hello-servlet");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        super.doPost(request,response);
+        String name = request.getParameter("name");
+        if (name.equals("admin")){
+            System.out.println("right one");
+            Cookie cookie = new Cookie("key1","valuet");
+            response.addCookie(cookie);
+        }
+        else System.out.println("wrong");
     }
+
 }
